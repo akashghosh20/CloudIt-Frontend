@@ -10,7 +10,7 @@ const EmployeeModal = ({ showModal, setShowModal, fetchEmployees }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/add_employee', {
+      await axios.post('http://localhost:5000/addemployee', {
         name,
         email,
         skill,
