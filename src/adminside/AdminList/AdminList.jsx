@@ -4,8 +4,7 @@ import React, { useEffect, useState } from 'react';
 const AdminTable = ({ data }) => {
     return (
         <tr>
-            <td>{data.adminId}</td>
-            <td>{data.adminName}</td>
+            <td>{data.name}</td>
             <td>{data.email}</td>
             <td>{data.role}</td>
         </tr>
@@ -19,16 +18,18 @@ const AdminList = () => {
     useEffect(() => {
         const fetchAdmins = async () => {
             try {
-                const response = await fetch('http://localhost:5000/admin/admin-ls');
+                const response = await fetch('http://localhost:5000/admin-ls');
                 const data = await response.json();
+                console.log('Fetched data:', data); // Log the fetched data
                 setAdmins(data);
             } catch (error) {
                 console.error('Error fetching admins:', error);
             }
         };
-
+    
         fetchAdmins();
     }, []);
+    
 
     return (
         <div className="overflow-x-auto">
@@ -36,7 +37,6 @@ const AdminList = () => {
             <table className="table-auto w-full">
                 <thead>
                     <tr>
-                        <th>Admin ID</th>
                         <th>Admin Name</th>
                         <th>Email</th>
                         <th>Role</th>
@@ -44,7 +44,7 @@ const AdminList = () => {
                 </thead>
                 <tbody>
                     {admins.map((admin) => (
-                        <AdminTable key={admin.adminId} data={admin} />
+                        <AdminTable key={admin._id} data={admin} />
                     ))}
                 </tbody>
             </table>

@@ -7,16 +7,18 @@ const ClientList = () => {
     useEffect(() => {
         const fetchClients = async () => {
             try {
-                const response = await fetch('http://localhost:5000/admin/client-ls'); // Your backend API URL
+                const response = await fetch('http://localhost:5000/client-ls');
                 const data = await response.json();
+                console.log(data); // Check if the data is an array
                 setClients(data);
             } catch (error) {
                 console.error('Error fetching clients:', error);
             }
         };
-
+    
         fetchClients();
     }, []);
+    
 
     return (
         <table className="table-auto w-full">
