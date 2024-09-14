@@ -1,26 +1,25 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import './index.css'
-import Junction from './userside/junction'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider, } from "react-router-dom";
-import Viewer from './userside/viewer/viewer';
-import Admin from './adminside/admin';
-import Signin from './userside/auth/signin';
-import SignUp from './userside/auth/signup';
-import Client from './userside/Client/client';
-import Buypackage from './userside/buypackage/buypackage';
-import Requireddetails from './userside/buypackage/requireddetails';
-
-import Home from './adminside/Home/Home';
-import Login from './adminside/Login/Login'
-import Projects from './adminside/Projects/Projects';
-import Aboutus from './userside/aboutus/aboutus';
-import Team from './userside/Team/team';
 import AddPackages from './adminside/AddPackages/AddPackages';
-import PackStat from './adminside/PackageStat/PackStat';
+import Admin from './adminside/admin';
+import AdminList from './adminside/AdminList/AdminList';
 import ClientList from './adminside/ClientList/ClientList';
 import EmployeeList from './adminside/employeelist/Employeelist';
+import Home from './adminside/Home/Home';
+import Login from './adminside/Login/Login';
+import PackStat from './adminside/PackageStat/PackStat';
+import ProjectsTable from './adminside/Projects/ProjectsTable';
+import './index.css';
+import Aboutus from './userside/aboutus/aboutus';
+import Signin from './userside/auth/signin';
+import SignUp from './userside/auth/signup';
+import Buypackage from './userside/buypackage/buypackage';
+import Requireddetails from './userside/buypackage/requireddetails';
 import Career from './userside/career/career';
+import Junction from './userside/junction';
+import Team from './userside/Team/team';
+import Viewer from './userside/viewer/viewer';
 
 
 
@@ -45,7 +44,7 @@ const router = createBrowserRouter([
       },
       {
         path:"/admin/projects",
-        element: <Projects></Projects>
+        element: <ProjectsTable></ProjectsTable>
       },
       {
         path:"/admin/add-pack",
@@ -67,9 +66,10 @@ const router = createBrowserRouter([
         element: <EmployeeList></EmployeeList>
       }, 
       {
-        path:"/admin/client-ls",
-        element: <ClientList></ClientList>
-      }
+        path:"/admin/admin-ls",
+        element: <AdminList></AdminList>
+      }, 
+      
 ]
   },
 {
@@ -88,7 +88,7 @@ const router = createBrowserRouter([
 
 {
   path: "/client",
-    element: <Client></Client>,
+    element: <ClientList></ClientList>,
   },
   {
     path: "/buypackage",

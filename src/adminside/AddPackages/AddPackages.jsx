@@ -1,26 +1,21 @@
+import React from 'react';
 import Swal from 'sweetalert2';
 
 const AddPackages = () => {
-    const categories = [
-        'January', 'February', 'March', 'April',
-    ];
+    const categories = ['January', 'February', 'March', 'April'];
 
     const handleAddPost = async (event) => {
         event.preventDefault();
-
         const form = event.target;
 
-        // Helper function to safely get and trim form values
         const getTrimmedValue = (name) => {
             const value = form[name]?.value;
             return value ? value.trim() : '';
         };
 
-    
         const category = form.categories?.value; 
         const packageName = getTrimmedValue('packageName');
         const packagePrice = getTrimmedValue('packagePrice');
-        // Handle packageContents if you need them
         const packageContents = Array.from({ length: 8 }, (_, i) => getTrimmedValue(`content${i + 1}`));
         const deliveryTime = getTrimmedValue('deliveryTime');
         const expressDeliveryTime = getTrimmedValue('expressDeliveryTime');
@@ -28,22 +23,11 @@ const AddPackages = () => {
         const packageDetails = getTrimmedValue('packageDetails');
         const packageRequirements = getTrimmedValue('packageRequirements');
 
-        // Basic validation
-        // if (!title || !packageName || !packagePrice) {
-        //     Swal.fire({
-        //         title: "Error!",
-        //         text: "Please fill in all required fields.",
-        //         icon: "error"
-        //     });
-        //     return;
-        // }
-
         const postData = {
-          
             category,
             packageName,
             packagePrice,
-            packageContents, // Uncomment if you decide to handle package contents
+            packageContents,
             deliveryTime,
             expressDeliveryTime,
             expressDeliveryPrice,
@@ -64,20 +48,20 @@ const AddPackages = () => {
 
             if (data.insertedId) {
                 Swal.fire({
-                    title: "New Post Added!",
-                    text: "You have successfully added a new Post",
+                    title: "New Package Added!",
+                    text: "You have successfully added a new package.",
                     icon: "success"
                 });
                 form.reset();
             } else {
                 Swal.fire({
                     title: "Error!",
-                    text: "There was an issue adding the post.",
+                    text: "There was an issue adding the package.",
                     icon: "error"
                 });
             }
         } catch (error) {
-            console.error('Error adding post:', error);
+            console.error('Error adding package:', error);
             Swal.fire({
                 title: "Error!",
                 text: "An unexpected error occurred.",
@@ -123,7 +107,6 @@ const AddPackages = () => {
                             <div className="label">
                                 <span className="label-text">Package Contents</span>
                             </div>
-                            {/* Handle package contents if needed */}
                             <div className="flex flex-col gap-2">
                                 {[...Array(8)].map((_, i) => (
                                     <div key={i} className="flex flex-row items-center gap-5">

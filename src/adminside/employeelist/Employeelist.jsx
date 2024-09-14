@@ -1,47 +1,64 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import EmployeeModal from './EmployeeModal'; // Import the modal component
-import EmployeeData from "./Employeedata";
 
 const EmployeeList = () => {
+  // State to store employee data
   const [employees, setEmployees] = useState([]);
-  const [showModal, setShowModal] = useState(false);
 
-  const fetchEmployees = () => {
-    axios.get('http://localhost:5000/employees')
-      .then(response => setEmployees(response.data))
-      .catch(error => console.error('Error fetching employees:', error));
-  };
-
+  // Fetch employees data from the API when the component mounts
   useEffect(() => {
-    fetchEmployees();
+    axios.get('http://localhost:5000/employees')  // Adjust this URL to your actual API endpoint
+      .then(response => {
+        // Log response to check if it's an array or object
+        console.log(response.data);
+        // Set employees data (if response contains a nested employees array, adjust the path)
+        setEmployees(response.data);
+      })
+      .catch(error => {
+        console.error("Error fetching employees:", error);
+      });
   }, []);
 
   return (
     <div>
-      <button className="btn btn-primary mb-4" onClick={() => setShowModal(true)}>+ Add Employee</button>
-      <table className="table">
-        <thead>
-          <tr className="font-bold text-xl ">
-            <td colSpan={7}>
-              <div className="flex flex-row justify-between items-center text-center">
-                <p className="w-[80px]">ID</p>
-                <p className="w-[200px]">Name</p>
-                <p className="w-[300px]">Email</p>
-                <p className="w-[200px]">Skill</p>
-                <p className="w-[200px]">Current Project</p>
-              </div>
-            </td>
-          </tr>
-        </thead>
-        <tbody>
-  {employees.map(employee => (
-    <EmployeeData key={employee.id} data={employee} />
-  ))}
-</tbody>
-
-      </table>
-      <EmployeeModal showModal={showModal} setShowModal={setShowModal} fetchEmployees={fetchEmployees} />
+      <h2>Employee List</h2>
+      {Array.isArray(employees) && employees.length > 0 ? (
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Country</th>
+              <th>City</th>
+              <th>Phone</th>
+              <th>Skill</th>
+              <th>Last Active</th>
+              <th>Current Project</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {employees.map((employee) => (
+              <tr key={employee._id}>
+                <td>{employee.name}</td>
+                <td>{employee.email}</td>
+                <td>{employee.country}</td>
+                <td>{employee.city}</td>
+                <td>{employee.phone}</td>
+                <td>{employee.skill}</td>
+                <td>{employee.lastActive}</td>
+                <td>{employee.currentProject}</td>
+                <td>
+                  <button>Edit</button>
+                  <button>Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <p>No employees found or data loading...</p>
+      )}
     </div>
   );
 };
