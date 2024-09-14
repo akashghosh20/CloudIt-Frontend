@@ -20,16 +20,20 @@ const AdminList = () => {
             try {
                 const response = await fetch('http://localhost:5000/admin-ls');
                 const data = await response.json();
+
                 console.log('Fetched data:', data); // Log the fetched data
-                setAdmins(data);
+                if (Array.isArray(data)) {
+                    setAdmins(data); // Ensure data is an array before setting state
+                } else {
+                    console.error('Data is not an array:', data);
+                }
             } catch (error) {
                 console.error('Error fetching admins:', error);
             }
         };
-    
+
         fetchAdmins();
     }, []);
-    
 
     return (
         <div className="overflow-x-auto">
@@ -43,9 +47,15 @@ const AdminList = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {admins.map((admin) => (
-                        <AdminTable key={admin._id} data={admin} />
-                    ))}
+                    {admins.length > 0 ? (
+                        admins.map((admin) => (
+                            <AdminTable key={admin._id} data={admin} />
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan="3">No admins found</td>
+                        </tr>
+                    )}
                 </tbody>
             </table>
         </div>
