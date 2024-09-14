@@ -16,6 +16,7 @@ const SignUp = () => {
     address: '',
     phone: ''
   });
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,7 +26,11 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (form.password !== form.retypePassword) {
-      alert('Passwords do not match');
+      setError('Passwords do not match');
+      return;
+    }
+    if (!/\S+@\S+\.\S+/.test(form.email)) {
+      setError('Invalid email format');
       return;
     }
     try {
@@ -37,9 +42,23 @@ const SignUp = () => {
         body: JSON.stringify(form)
       });
       const data = await response.json();
-      alert(data.message);
+      if (response.ok) {
+        alert(data.message);
+        setForm({
+          name: '',
+          email: '',
+          password: '',
+          retypePassword: '',
+          country: '',
+          address: '',
+          phone: ''
+        });
+      } else {
+        setError(data.message || 'An error occurred');
+      }
     } catch (error) {
       console.error('Error:', error);
+      setError('Network error. Please try again.');
     }
   };
 
@@ -51,42 +70,104 @@ const SignUp = () => {
           <div className='lg:w-1/2 w-auto bg-white shadow-md h-auto my-20 p-10'>
             <div className='text-4xl font-bold mb-10'>Sign Up</div>
             <form onSubmit={handleSubmit}>
-              <label className="input input-bordered flex items-center gap-2 mb-4">
+              {error && <div className='text-red-500 mb-4'>{error}</div>}
+              <label htmlFor="name" className="input input-bordered flex items-center gap-2 mb-4">
                 <FaUser />
-                <input type="text" name="name" className="grow" placeholder="Enter your name" value={form.name} onChange={handleChange} />
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  className="grow"
+                  placeholder="Enter your name"
+                  value={form.name}
+                  onChange={handleChange}
+                />
               </label>
-              <label className="input input-bordered flex items-center gap-2 mb-4">
+              <label htmlFor="email" className="input input-bordered flex items-center gap-2 mb-4">
                 <MdEmail />
-                <input type="text" name="email" className="grow" placeholder="Enter your email" value={form.email} onChange={handleChange} />
+                <input
+                  type="text"
+                  id="email"
+                  name="email"
+                  className="grow"
+                  placeholder="Enter your email"
+                  value={form.email}
+                  onChange={handleChange}
+                />
               </label>
-              <label className="input input-bordered flex items-center gap-2 mb-4">
+              <label htmlFor="password" className="input input-bordered flex items-center gap-2 mb-4">
                 <RiLockPasswordLine />
-                <input type="password" name="password" className="grow" placeholder="password" value={form.password} onChange={handleChange} />
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  className="grow"
+                  placeholder="Password"
+                  value={form.password}
+                  onChange={handleChange}
+                />
               </label>
-              <label className="input input-bordered flex items-center gap-2 mb-4">
+              <label htmlFor="retypePassword" className="input input-bordered flex items-center gap-2 mb-4">
                 <RiLockPasswordLine />
-                <input type="password" name="retypePassword" className="grow" placeholder="retype password" value={form.retypePassword} onChange={handleChange} />
+                <input
+                  type="password"
+                  id="retypePassword"
+                  name="retypePassword"
+                  className="grow"
+                  placeholder="Retype password"
+                  value={form.retypePassword}
+                  onChange={handleChange}
+                />
               </label>
-              <label className="input input-bordered flex items-center gap-2 mb-4">
+              <label htmlFor="country" className="input input-bordered flex items-center gap-2 mb-4">
                 <FaLocationDot />
-                <input type="text" name="country" className="grow" placeholder="Country" value={form.country} onChange={handleChange} />
+                <input
+                  type="text"
+                  id="country"
+                  name="country"
+                  className="grow"
+                  placeholder="Country"
+                  value={form.country}
+                  onChange={handleChange}
+                />
               </label>
-              <label className="input input-bordered flex items-center gap-2 mb-4">
+              <label htmlFor="address" className="input input-bordered flex items-center gap-2 mb-4">
                 <FaRegAddressBook />
-                <input type="text" name="address" className="grow" placeholder="Address" value={form.address} onChange={handleChange} />
+                <input
+                  type="text"
+                  id="address"
+                  name="address"
+                  className="grow"
+                  placeholder="Address"
+                  value={form.address}
+                  onChange={handleChange}
+                />
               </label>
-              <label className="input input-bordered flex items-center gap-2 mb-4">
+              <label htmlFor="phone" className="input input-bordered flex items-center gap-2 mb-4">
                 <FaPhoneAlt />
-                <input type="text" name="phone" className="grow" placeholder="Phone" value={form.phone} onChange={handleChange} />
+                <input
+                  type="text"
+                  id="phone"
+                  name="phone"
+                  className="grow"
+                  placeholder="Phone"
+                  value={form.phone}
+                  onChange={handleChange}
+                />
               </label>
-              <div className='text-end my-2 text-blue-500'>forgot your password?</div>
+              <div className='text-end my-2 text-blue-500'>Forgot your password?</div>
               <div>
-                <button type="submit" className='btn w-full bg-blue-500 text-white'>Sign up</button>
+                <button
+                  type="submit"
+                  className='btn w-full bg-blue-500 text-white hover:bg-blue-600 transition-colors'
+                >
+                  Sign Up
+                </button>
               </div>
             </form>
           </div>
         </div>
-        <div className='lg:block hidden'>image</div>
+        <div className='lg:block hidden'>Image</div>
       </div>
       <Footer />
     </div>
