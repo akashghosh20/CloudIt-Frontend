@@ -18,7 +18,7 @@ const AdminList = () => {
     useEffect(() => {
         const fetchAdmins = async () => {
             try {
-                const response = await fetch('http://localhost:5000/admin-ls');
+                const response = await fetch('https://localhost:5000/admin-ls');
                 const data = await response.json();
 
                 console.log('Fetched data:', data); // Log the fetched data

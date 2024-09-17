@@ -20,7 +20,7 @@ import SignUp from './userside/auth/signup';
 import Buypackage from './userside/buypackage/buypackage';
 import Requireddetails from './userside/buypackage/requireddetails';
 import Career from './userside/career/career';
-import Client from './userside/chat/clientchat';
+import Client from './userside/Client/Client';
 import Junction from './userside/junction';
 import Team from './userside/Team/team';
 import Viewer from './userside/viewer/viewer';
@@ -110,10 +110,6 @@ const router = createBrowserRouter([
 
 {
   path: "/client",
-    element: <ClientList></ClientList>,
-  },
-{
-  path: "/cchat",
     element: <Client></Client>,
   },
   {

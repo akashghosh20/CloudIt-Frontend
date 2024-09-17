@@ -3,6 +3,7 @@ import { FaPhoneAlt, FaRegAddressBook, FaUser } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import Footer from '../footer/footer';
 import Navber from '../navBer/navber';
 
@@ -17,6 +18,7 @@ const SignUp = () => {
     phone: ''
   });
   const [error, setError] = useState('');
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -53,6 +55,8 @@ const SignUp = () => {
           address: '',
           phone: ''
         });
+        // Navigate to the client component or dashboard after successful signup
+        navigate('/client');
       } else {
         setError(data.message || 'An error occurred');
       }
