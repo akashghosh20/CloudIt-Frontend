@@ -12,7 +12,7 @@ const Sidebar = () => {
         { id: 7, name: 'Marketing', path: '/admin/marketing' },
         { id: 8, name: 'Acconts', path: '/admin/accounts' },
         { id: 9, name: 'FAQ', path: '/admin/faq' },
-        { id: 10, name: 'Sell Coupons', path: '/admin/sell-coup' },
+        { id: 10, name: 'Sell Coupons', path: '/admin/coupon' },
         { id: 11, name: 'Reviews', path: '/admin/reviews' },
         { id: 12, name: 'Admin List', path: '/admin/admin-ls' },
         { id: 13, name: 'Logout', path: '/admin/logout' },

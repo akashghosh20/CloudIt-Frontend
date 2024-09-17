@@ -5,11 +5,14 @@ import AddPackages from './adminside/AddPackages/AddPackages';
 import Admin from './adminside/admin';
 import AdminList from './adminside/AdminList/AdminList';
 import ClientList from './adminside/ClientList/ClientList';
+import Coupon from './adminside/Coupons/Caoupon';
 import EmployeeList from './adminside/employeelist/Employeelist';
+import Faqall from './adminside/Faq/Faq';
 import Home from './adminside/Home/Home';
 import Login from './adminside/Login/Login';
 import PackStat from './adminside/PackageStat/PackStat';
 import ProjectsTable from './adminside/Projects/ProjectsTable';
+import Reviews from './adminside/Reviews/Reviews';
 import './index.css';
 import Aboutus from './userside/aboutus/aboutus';
 import Signin from './userside/auth/signin';
@@ -17,6 +20,7 @@ import SignUp from './userside/auth/signup';
 import Buypackage from './userside/buypackage/buypackage';
 import Requireddetails from './userside/buypackage/requireddetails';
 import Career from './userside/career/career';
+import Client from './userside/chat/clientchat';
 import Junction from './userside/junction';
 import Team from './userside/Team/team';
 import Viewer from './userside/viewer/viewer';
@@ -56,6 +60,18 @@ const router = createBrowserRouter([
         loader: ()=> fetch('http://localhost:5000/packages'),
 
       },
+      {
+        path:"/admin/reviews",
+        element: <Reviews></Reviews>,
+        loader: ()=> fetch('http://localhost:5000/review'),
+
+      },
+      {
+        path:"/admin/faq",
+        element: <Faqall></Faqall>,
+        loader: ()=> fetch('http://localhost:5000/packages'),
+
+      },
  
       {
         path:"/admin/client-ls",
@@ -68,6 +84,12 @@ const router = createBrowserRouter([
       {
         path:"/admin/admin-ls",
         element: <AdminList></AdminList>
+      }, 
+      {
+        path:"/admin/coupon",
+        element: <Coupon></Coupon>,
+        loader: ()=> fetch('http://localhost:5000/coupon'),
+
       }, 
       
 ]
@@ -89,6 +111,10 @@ const router = createBrowserRouter([
 {
   path: "/client",
     element: <ClientList></ClientList>,
+  },
+{
+  path: "/cchat",
+    element: <Client></Client>,
   },
   {
     path: "/buypackage",
