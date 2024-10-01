@@ -13,6 +13,7 @@ import Login from './adminside/Login/Login';
 import PackStat from './adminside/PackageStat/PackStat';
 import ProjectsTable from './adminside/Projects/ProjectsTable';
 import Reviews from './adminside/Reviews/Reviews';
+import SubmitReview from './adminside/SubmitReview';
 import './index.css';
 import Aboutus from './userside/aboutus/aboutus';
 import Signin from './userside/auth/signin';
@@ -111,6 +112,10 @@ const router = createBrowserRouter([
 {
   path: "/client",
     element: <Client></Client>,
+  },
+{
+  path: "/submitReview",
+    element: <SubmitReview></SubmitReview>,
   },
   {
     path: "/buypackage",
