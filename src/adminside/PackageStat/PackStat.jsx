@@ -7,7 +7,7 @@ const PackStat = () => {
 
     useEffect(() => {
         // Fetch all packages
-        fetch('https://flutterstarter.xyz/packages')
+        fetch('http://localhost:5000/packages')
             .then(res => {
                 if (!res.ok) {
                     throw new Error(`HTTP error! Status: ${res.status}`);
